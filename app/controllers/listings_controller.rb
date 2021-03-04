@@ -1,10 +1,12 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy find_seller]
-  before_action :find_seller, only: %i[show]
+  before_action :find_seller, :find_type, only: %i[show]
 
   # GET /listings or /listings.json
   def index
     @listings = Listing.all
+    @user = User.all
+    @type = Type.all
   end
 
   # GET /listings/1 or /listings/1.json
@@ -72,6 +74,10 @@ class ListingsController < ApplicationController
     # Find listing owner
     def find_seller()
       @seller = User.find(@listing.user_id)
+    end
+
+    def find_type()
+      @type = Type.find(@listing.type_id)
     end
 
     

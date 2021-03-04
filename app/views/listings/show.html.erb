@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= "#{@seller.first_name} #{@seller.last_name}" %>
+  <%= @seller.username.capitalize %>
 </p>
 
 <p>
   <strong>Type:</strong>
-  <%= @listing.type_id %>
+  <%= @type.name %>
 </p>
 
 <p>

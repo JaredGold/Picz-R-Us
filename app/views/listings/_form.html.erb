@@ -18,17 +18,13 @@
 
   <div class="field">
     <%= form.label :type_id %>
-    <%= form.text_field :type_id %>
+    <%#= form.text_field :type_id %>
+    <%= form.collection_select(:type_id, Type.all, :id, :name, prompt: true ) %>
   </div>
 
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :duration %>
-    <%= form.time_select :duration %>
   </div>
 
   <div class="field">
