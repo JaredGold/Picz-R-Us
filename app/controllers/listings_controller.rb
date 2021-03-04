@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: %i[ show edit update destroy ]
+  before_action :set_listing, only: %i[show edit update destroy find_seller]
+  before_action :find_seller, only: %i[show]
 
   # GET /listings or /listings.json
   def index
@@ -8,7 +9,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/1 or /listings/1.json
   def show
-    @user = User.find_by(user_id: @listing.user_id)
+    
   end
 
   # GET /listings/new
@@ -67,4 +68,11 @@ class ListingsController < ApplicationController
     def listing_params
       params.require(:listing).permit(:user_id, :type_id, :name, :duration, :price, :description)
     end
+
+    # Find listing owner
+    def find_seller()
+      @seller = User.find(@listing.user_id)
+    end
+
+    
 end
