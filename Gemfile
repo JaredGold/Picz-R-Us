@@ -58,3 +58,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise", "~> 4.7"
 
 gem "cloudinary", "~> 1.18"
+
+gem "activestorage-cloudinary-service", "~> 0.2.3"
