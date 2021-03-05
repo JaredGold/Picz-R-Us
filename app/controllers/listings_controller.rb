@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy find_seller]
   before_action :find_seller, :find_type, only: %i[show]
+  before_action :authenticate_user!, only: %i[new]
 
   # GET /listings or /listings.json
   def index
