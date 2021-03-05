@@ -1,0 +1,9 @@
+<nav>
+  <%= link_to "Home", root_path %>
+  <% if !user_signed_in? %>
+    <%= link_to "Sign in", new_user_session_path %>
+    <%= link_to "Sign Up", signup_path %>
+  <% else %>
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+  <% end %>
+</nav>

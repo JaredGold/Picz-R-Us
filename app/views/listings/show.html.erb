@@ -1,0 +1,34 @@
+<p>
+  <strong>User:</strong>
+  <%= @seller.username.capitalize %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @type.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @listing.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @listing.price %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @listing.description %>
+</p>
+
+<% if @listing.footage.attached? %>
+  <p>
+    <strong>Footage:</strong>
+    <%= image_tag @listing.footage %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>
