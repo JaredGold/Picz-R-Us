@@ -8,5 +8,7 @@ Rails.application.routes.draw do
     post 'signin', to: 'devise/sessions#create', as: :user_session
     delete 'signout', to: 'devise/sessions#destroy', as: :destroy_user_session
     get 'signup', to: 'devise/registrations#new'
+
+
   end
 end
