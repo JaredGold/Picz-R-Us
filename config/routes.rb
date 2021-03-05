@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     delete 'signout', to: 'devise/sessions#destroy', as: :destroy_user_session
     get 'signup', to: 'devise/registrations#new'
 
-
+    #CHANGE HERE
   end
 end
