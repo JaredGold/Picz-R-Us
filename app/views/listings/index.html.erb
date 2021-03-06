@@ -17,7 +17,7 @@
       <tr>
         <td><%= @user.find(listing.user_id).username.capitalize %></td>
         <td><%= @type.find(listing.type_id).name %></td>
-        <td><%= link_to listing.name, listingg %></td>
+        <td><%= link_to listing.name, listing %></td>
         <td><%= "$"+number_with_precision(listing.price, precision: 2) %></td>
         <td><%= listing.description %></td>
         <!-- <td><%= link_to 'Show', listing %></td> -->
