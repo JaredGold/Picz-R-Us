@@ -6,4 +6,8 @@
   <% else %>
     <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
   <% end %>
+  <% if user_signed_in? %>
+    <%# TODO - add a link to the current user's profile page %>
+    <%= current_user.username.capitalize %>
+  <% end %>
 </nav>
