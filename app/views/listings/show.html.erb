@@ -30,5 +30,7 @@
   </p>
 <% end %>
 
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<% if user_signed_in? && @listing.user_id == current_user.id  %>
+  <%= link_to 'Edit', edit_listing_path(@listing) %> |
+<% end %>
 <%= link_to 'Back', listings_path %>
