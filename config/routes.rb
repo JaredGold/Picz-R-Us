@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   resources :listings
   devise_for :users, skip: [:sessions]
 
-  root "listings#index"
-  get 'profile', to: "profile#show", as: "user_profile"
+  root 'listings#index'
+  get 'profile', to: 'profile#show', as: 'user_profile'
+  get 'profile/new', to: 'profile#new', as: 'new_user_profile'
+  
+  # Set Devise Sign in/ sign up/ sign out routes
   as :user do
     get 'signin', to: 'devise/sessions#new', as: :new_user_session
     post 'signin', to: 'devise/sessions#create', as: :user_session
