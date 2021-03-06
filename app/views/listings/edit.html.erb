@@ -2,5 +2,12 @@
 
 <%= render 'form', listing: @listing %>
 
+<% if @listing.footage.attached? %>
+  <p>
+    <strong>Footage:</strong>
+    <%= image_tag @listing.footage, width: "400px" %>
+  </p>
+<% end %>
+
 <%= link_to 'Show', @listing %> |
 <%= link_to 'Back', listings_path %>

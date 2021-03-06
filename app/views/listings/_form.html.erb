@@ -10,13 +10,6 @@
       </ul>
     </div>
   <% end %>
-  
-  <!-- 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-  -->
 
   <div class="field">
     <%= form.label :type_id %>
@@ -39,10 +32,13 @@
     <%= form.text_area :description %>
   </div>
 
-  <div class="field">
-    <%= form.label :footage %>
-    <%= form.file_field :footage %>
-  </div>
+  <% if !@listing.footage.attached? %>
+    <div class="field">
+      <%= form.label :footage %>
+      <%= form.file_field :footage %>
+    </div>
+  <% end %>
+  
 
   <div class="actions">
     <%= form.submit %>

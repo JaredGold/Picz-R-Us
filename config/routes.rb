@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:sessions]
 
   root "listings#index"
+  get 'profile', to: "profile#show", as: "user_profile"
   as :user do
     get 'signin', to: 'devise/sessions#new', as: :new_user_session
     post 'signin', to: 'devise/sessions#create', as: :user_session
