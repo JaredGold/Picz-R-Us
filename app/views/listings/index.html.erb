@@ -17,10 +17,10 @@
       <tr>
         <td><%= @user.find(listing.user_id).username.capitalize %></td>
         <td><%= @type.find(listing.type_id).name %></td>
-        <td><%= listing.name %></td>
+        <td><%= link_to listing.name, listingg %></td>
         <td><%= "$"+number_with_precision(listing.price, precision: 2) %></td>
         <td><%= listing.description %></td>
-        <td><%= link_to 'Show', listing %></td>
+        <!-- <td><%= link_to 'Show', listing %></td> -->
         <% if user_signed_in? && listing.user_id == current_user.id %>
           <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
           <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
