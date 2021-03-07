@@ -9,10 +9,11 @@
   
   <% if user_signed_in? %>
     <% if current_user.profile != nil %>
-      <%= link_to current_user.username.capitalize, user_profile_path %>
+      <%= link_to current_user.username.capitalize, profile_path %>
     <% else %>
       <%# TODO - Create a create profile %>
-      <p>PROFILE NOT CREATED</p><%= link_to current_user.username.capitalize, user_profile_path %>
+      <%= link_to current_user.username.capitalize, profile_path %>
+      <p>PROFILE NOT CREATED</p>
     <% end %>
   <% end %>
 </nav>

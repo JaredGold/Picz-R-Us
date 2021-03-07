@@ -1,33 +1,27 @@
 class ProfileController < ApplicationController
 before_action :authenticate_user!, only: %i[show]
 before_action :find_user, :find_user_profile, only: %i[show create new]
+before_action :find_user_name, only: %i[show new]
 
   def show
-    @name = "#{@user.first_name} #{@user.last_name}"
+    
   end
   
   def new
-    @profile = Profile.new
+    
   end
 
   def create
-    @profile = @user_profile.create(listing_params)
-
-
-    # TODO Fix below code to work with about me page
-    # respond_to do |format|
-    #   if @about_me.save
-    #     format.html { redirect_to @listing, notice: "Listing was successfully created." }
-    #     format.json { render :show, status: :created, location: @listing }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @listing.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    @profile = Profile.create(profile_params)
+    
   end
 
   private
   
+  def profile_params
+    params.permit(:about_me, :age, user_id: current_user.id)
+  end
+
   def find_user
     @user = current_user
   end
@@ -36,4 +30,7 @@ before_action :find_user, :find_user_profile, only: %i[show create new]
     @user_profile = current_user.profile
   end
 
+  def find_user_name
+    @name = "#{@user.first_name} #{@user.last_name}"
+  end
 end

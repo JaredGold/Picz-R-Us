@@ -1,1 +1,18 @@
-<h1>You landed on new: <%= @user.first_name + ' ' + @user.last_name%></h1>
+<h1><%= "#{@name}'s Profile" %></h1>
+  <%= form_with model: @user.profile do |form| %>
+
+  <div class="field">
+    <%= form.label :about_me %>
+    <%= form.text_area :about_me %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
