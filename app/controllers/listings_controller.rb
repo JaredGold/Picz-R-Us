@@ -27,7 +27,6 @@ class ListingsController < ApplicationController
   # POST /listings or /listings.json
   def create
     @listing = current_user.listings.create(listing_params)
-    # @listing = Listing.new(listing_params)
     @listing.footage.attach(params[:listing][:footage])
 
     respond_to do |format|
