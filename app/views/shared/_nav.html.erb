@@ -11,9 +11,7 @@
     <% if current_user.profile != nil %>
       <%= link_to current_user.username.capitalize, profile_path %>
     <% else %>
-      <%# TODO - Create a create profile %>
-      <%= link_to current_user.username.capitalize, profile_path %>
-      <p>PROFILE NOT CREATED</p>
+      <%= link_to current_user.username.capitalize, new_profile_path %>
     <% end %>
   <% end %>
 </nav>

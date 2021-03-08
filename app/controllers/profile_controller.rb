@@ -1,7 +1,7 @@
 class ProfileController < ApplicationController
-before_action :authenticate_user!, only: %i[show]
-before_action :find_user, :find_user_profile, only: %i[show create new]
-before_action :find_user_name, only: %i[show new]
+  before_action :find_user, :find_user_profile, only: %i[show create new edit update]
+  before_action :authenticate_user!, only: %i[show create new edit]
+  before_action :find_user_name, only: %i[show new]
 
   def show
     
@@ -24,6 +24,16 @@ before_action :find_user_name, only: %i[show new]
       end
     end
     
+  end
+
+  def edit
+  end
+
+  def update
+    @profile = Profile.find(current_user.id)
+    @profile.update(profile_params)
+
+    redirect_to profile_path
   end
 
   private

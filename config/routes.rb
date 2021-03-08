@@ -2,10 +2,15 @@ Rails.application.routes.draw do
   resources :listings
   devise_for :users, skip: [:sessions]
 
+  # Root to the listings page
   root 'listings#index'
-  
+  # profile shows user profile
   get 'profile', to: 'profile#show', as: 'profile'
-
+  # edit profile allows users to edit their pre existing profile
+  get 'profile/edit', to: 'profile#edit', as: 'edit_profile'
+  patch 'profile', to: 'profile#update'
+  put 'profile', to: 'profile#update'
+  # new profile allows the user to create a new profile
   get 'profile/new', to: 'profile#new', as: 'new_profile'
   post 'profile/new', to: 'profile#create'
   

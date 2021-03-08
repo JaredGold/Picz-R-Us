@@ -1,18 +1,3 @@
-<h1><%= "#{@name}'s Profile" %></h1>
-  <%= form_with model: @user.profile do |form| %>
+<h1><%= "Create Your Profile" %></h1>
 
-  <div class="field">
-    <%= form.label :about_me %>
-    <%= form.text_area :about_me %>
-  </div>
-
-  <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-
-<% end %>
+<%= render 'form', profile: @profile %>
