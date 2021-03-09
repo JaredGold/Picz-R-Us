@@ -1,5 +1,6 @@
 <h1>Listings</h1>
 
+<!--
 <table>
   <thead>
     <tr>
@@ -20,7 +21,6 @@
         <td><%= link_to listing.name, listing %></td>
         <td><%= "$"+number_with_precision(listing.price, precision: 2) %></td>
         <td><%= listing.description %></td>
-        <!-- <td><%= link_to 'Show', listing %></td> -->
         <% if user_signed_in? && listing.user_id == current_user.id %>
           <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
           <td><%= link_to 'Remove Listing', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -30,5 +30,15 @@
   </tbody>
 </table>
 
-<br>
+-->
 <%= link_to 'New Listing', new_listing_path %>
+
+
+<% @listings.each do |listing| %>
+  <h4><%= listing.name %></h4>
+  <%= image_tag listing.footage, width: '400px' %>
+  <br>
+  <%= listing.description %>
+  <p>Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
+  <%= link_to 'Buy Now', listing %>
+<% end %>

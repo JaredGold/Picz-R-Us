@@ -1,11 +1,10 @@
-<p>
-  <strong>User:</strong>
-  <%= @seller.username.capitalize %>
-</p>
+<% if @listing.footage.attached? %>
+    <%= image_tag @listing.footage, width: '400px' %>
+<% end %>
 
 <p>
-  <strong>Type:</strong>
-  <%= @type.name %>
+  <strong>Seller:</strong>
+  <%= @seller.username.capitalize %>
 </p>
 
 <p>
@@ -15,7 +14,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @listing.price %>
+  <%= "$"+number_with_precision(@listing.price, precision: 2) %>
 </p>
 
 <p>
@@ -23,14 +22,11 @@
   <%= @listing.description %>
 </p>
 
-<% if @listing.footage.attached? %>
-  <p>
-    <strong>Footage:</strong>
-    <%= image_tag @listing.footage, width: '400px' %>
-  </p>
-<% end %>
 
 <% if user_signed_in? && @listing.user_id == current_user.id  %>
-  <%= link_to 'Edit', edit_listing_path(@listing) %> |
+  <%= link_to 'Edit', edit_listing_path(@listing) %> |  
+<% else %>
+  <%= link_to 'Buy Now' %>
+  <br>
 <% end %>
 <%= link_to 'Back', listings_path %>
