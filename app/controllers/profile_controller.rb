@@ -30,16 +30,22 @@ class ProfileController < ApplicationController
   end
 
   def update
-    @profile = Profile.find(current_user.id)
-    @profile.update(profile_params)
-
-    redirect_to profile_path
+    respond_to do |format|
+      if current_user.profile.update(profile_params)
+        format.html { redirect_to profile_path, notice: "Profile was successfully updated." }
+        format.json { render :show, status: :ok, location: profile+path}
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @profile.errors, status: :unprocessable_entity }
+      end
+  end
+      # redirect_to profile_path
   end
 
   private
   
   def profile_params
-    params.permit(:user_id, :about_me, :age)
+    params.permit(:about_me, :age)
   end
 
   def find_user

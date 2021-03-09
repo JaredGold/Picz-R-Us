@@ -1,3 +1,13 @@
 <h1><%= @name %></h1>
 <p><strong>About Me:</strong> <%= @user_profile.about_me %></p>
 <p><strong>Age:</strong> <%= @user_profile.age %></p>
+
+<h4>My Works:</h4>
+
+<% i = 0 %>
+<% @user.listings.each do |listing| %>
+  
+  <%= image_tag listing.footage, width: '400px' %>
+  <% i += 1%>
+  <% break if i == 10 %>
+<% end %>
