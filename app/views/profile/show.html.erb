@@ -6,8 +6,8 @@
 
 <% i = 0 %>
 <% @user.listings.each do |listing| %>
-  
   <%= image_tag listing.footage, width: '400px' %>
   <% i += 1%>
   <% break if i == 10 %>
 <% end %>
+

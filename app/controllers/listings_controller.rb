@@ -12,7 +12,27 @@ class ListingsController < ApplicationController
 
   # GET /listings/1 or /listings/1.json
   def show
-    
+
+    session = Stripe::Checkout::Session.create({
+      payment_method_types: ['card'],
+      line_items: [{
+        price_data: {
+          currency: 'aud',
+          product_data: {
+            name: @listing.name,
+            description: @listing.description,
+            images: @listing.footage,
+            amount: (@listing.price * 100),
+          },
+        },
+        quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: root_url,
+      cancel_url: root_url,
+    })
+  
+    { id: session.id }.to_json
   end
 
   # GET /listings/new

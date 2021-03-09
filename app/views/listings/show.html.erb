@@ -13,11 +13,6 @@
 </p>
 
 <p>
-  <strong>Price:</strong>
-  <%= "$"+number_with_precision(@listing.price, precision: 2) %>
-</p>
-
-<p>
   <strong>Description:</strong>
   <%= @listing.description %>
 </p>
@@ -25,8 +20,23 @@
 
 <% if user_signed_in? && @listing.user_id == current_user.id  %>
   <%= link_to 'Edit', edit_listing_path(@listing) %> |  
+<% elsif user_signed_in? %>
+  <button id="checkout-button">Buy Footage <%= number_to_currency(@listing.price) %></button>
+  <br>
 <% else %>
-  <%= link_to 'Buy Now' %>
+  <%= link_to 'Buy Now', new_user_session_path %>
   <br>
 <% end %>
 <%= link_to 'Back', listings_path %>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+        const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
+        stripe.redirectToCheckout({
+            sessionID: "<%= @session_id %>"
+        });
+    }):
+</script>
