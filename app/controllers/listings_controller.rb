@@ -15,6 +15,7 @@ class ListingsController < ApplicationController
 
     session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
+      customer_email: current_user.email,
       line_items: [{
         price_data: {
           currency: 'aud',
@@ -22,11 +23,11 @@ class ListingsController < ApplicationController
             name: @listing.name,
             description: @listing.description,
             images: @listing.footage,
-            amount: (@listing.price * 100),
+            amount: (@listing.price * 100).to_i,
           },
         },
         quantity: 1,
-      }],
+        }],
       mode: 'payment',
       success_url: root_url,
       cancel_url: root_url,
