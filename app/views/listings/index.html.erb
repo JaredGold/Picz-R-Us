@@ -35,7 +35,7 @@
 
 
 <% @listings.each do |listing| %>
-  <h4><%= listing.name %></h4>
+  <h4 class=".border-2"><%= listing.name %></h4>
   <%= image_tag listing.footage, width: '400px' %>
   <br>
   <%= listing.description %>
