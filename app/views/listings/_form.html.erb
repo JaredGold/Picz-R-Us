@@ -35,7 +35,7 @@
   <% if !@listing.footage.attached? %>
     <div class="field">
       <%= form.label :footage %>
-      <%= form.file_field :footage %>
+      <%= form.file_field :footage, direct_upload: true %>
     </div>
   <% end %>
   

@@ -1,5 +1,5 @@
 <% if @listing.footage.attached? %>
-    <%= image_tag @listing.footage, width: '400px' %>
+    <%= cl_image_tag generate_tag(@listing.footage.url), :effect=>"sepia:50" %>
 <% end %>
 
 <p>

@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+type = Type.create(name:'Image', description: 'A still photo')
+type = Type.create(name:'Film', description: 'A collection of moving pictures')

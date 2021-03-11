@@ -5,7 +5,8 @@
 
 <% @listings.each do |listing| %>
   <h4><%= listing.name %></h4>
-  <%= image_tag listing.footage, width: '400px' %>
+  <%# img_url = url_for(listing.footage, width: 100, height: 100, effect: "cartoonify") %>
+  <%= cl_image_tag listing.footage.url, width: 400, :effect=>"sepia:50"  %>
   <br>
   <%= listing.description %>
   <p>Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
