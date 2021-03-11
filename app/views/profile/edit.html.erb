@@ -1,3 +1,19 @@
 <h1>Edit Your Profile</h1>
 
-<%= render 'form', profile: @profile, url: profile_edit_path %>
+<%= form_with(url: profile_edit_path , model: @profile) do |form| %>
+
+  <div class="field">
+    <%= form.label :about_me %>
+    <%= form.text_area :about_me %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
