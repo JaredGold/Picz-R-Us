@@ -1,5 +1,6 @@
 class ProfileController < ApplicationController
   before_action :find_user, :find_user_profile, only: %i[show create new edit update]
+  before_action :find_user_profile, only: %i[show create new edit update]
   before_action :authenticate_user!, only: %i[show create new edit]
   before_action :find_user_name, only: %i[show new]
 
@@ -27,7 +28,7 @@ class ProfileController < ApplicationController
   end
 
   def edit
-
+    @profile = current_user.profile
   end
 
   def update
