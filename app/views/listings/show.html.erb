@@ -1,5 +1,5 @@
 <% if @listing.footage.attached? %>
-    <%= cl_image_tag generate_tag(@listing.footage.url), :effect=>"sepia:50" %>
+    <%= cl_image_tag generate_tag(@listing.footage.url) %>
 <% end %>
 
 <p>
@@ -42,3 +42,5 @@
       });
   })
 </script>
+
+"This little piggy went to market"
