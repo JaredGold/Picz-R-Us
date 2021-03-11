@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+if Type.count == 0
+  Type.create(name:'Image', description: 'A still photo')
+  Type.create(name:'Film', description: 'A collection of moving pictures')
+end
+
+if User.count == 0
+  User.create(username:'Admin', password:'password', first_name:'Jared', last_name:'Goldstein', email:'admin@mail.com')
+end

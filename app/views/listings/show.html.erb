@@ -1,11 +1,10 @@
-<p>
-  <strong>User:</strong>
-  <%= @seller.username.capitalize %>
-</p>
+<% if @listing.footage.attached? %>
+    <%= cl_image_tag listing.footage.key %>
+<% end %>
 
 <p>
-  <strong>Type:</strong>
-  <%= @type.name %>
+  <strong>Seller:</strong>
+  <%= @seller.username.capitalize %>
 </p>
 
 <p>
@@ -14,21 +13,32 @@
 </p>
 
 <p>
-  <strong>Price:</strong>
-  <%= @listing.price %>
-</p>
-
-<p>
   <strong>Description:</strong>
   <%= @listing.description %>
 </p>
 
-<% if @listing.footage.attached? %>
-  <p>
-    <strong>Footage:</strong>
-    <%= image_tag @listing.footage %>
-  </p>
-<% end %>
 
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<% if user_signed_in? && @listing.user_id == current_user.id  %>
+  <%= link_to 'Edit', edit_listing_path(@listing) %> |  
+<% elsif user_signed_in? %>
+  <button id="checkout-button">Buy Footage <%= number_to_currency(@listing.price) %></button>
+  <br>
+<% else %>
+  <%= link_to 'Buy Now', new_user_session_path %>
+  <br>
+<% end %>
 <%= link_to 'Back', listings_path %>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+
+
+
+<script>
+  document.getElementById("checkout-button").addEventListener("click", () => {
+    const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+  })
+</script>

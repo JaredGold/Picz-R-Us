@@ -12,11 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :type_id %>
     <%#= form.text_field :type_id %>
     <%= form.collection_select(:type_id, Type.all, :id, :name, prompt: true ) %>
@@ -29,7 +24,7 @@
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.text_field :price %>
+    <%= form.number_field :price %>
   </div>
 
   <div class="field">
@@ -37,10 +32,13 @@
     <%= form.text_area :description %>
   </div>
 
-  <div class="field">
-    <%= form.label :footage %>
-    <%= form.file_field :footage %>
-  </div>
+  <% if !@listing.footage.attached? %>
+    <div class="field">
+      <%= form.label :footage %>
+      <%= form.file_field :footage, direct_upload: true %>
+    </div>
+  <% end %>
+  
 
   <div class="actions">
     <%= form.submit %>

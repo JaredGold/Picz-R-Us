@@ -12,7 +12,27 @@ class ListingsController < ApplicationController
 
   # GET /listings/1 or /listings/1.json
   def show
-    
+    session = Stripe::Checkout::Session.create({
+      payment_method_types: ['card'],
+      customer_email: current_user.email,
+      line_items: [{
+        name: @listing.name,
+        description: @listing.description,
+        # images: @listing.footage,
+        # price_data: {
+          # },
+        amount: (@listing.price * 100).to_i,
+        currency: 'aud',
+        quantity: 1,
+        }],
+      mode: 'payment',
+      success_url: root_url,
+      cancel_url: root_url,
+    })
+  
+    @session_id = session.id
+
+    pp @listing.footage.url
   end
 
   # GET /listings/new
@@ -26,8 +46,8 @@ class ListingsController < ApplicationController
 
   # POST /listings or /listings.json
   def create
-    @listing = Listing.new(listing_params)
-    @listing.footage.attach(params[:listing][:footage])
+    @listing = current_user.listings.create(listing_params)
+    # @listing.footage.attach()
 
     respond_to do |format|
       if @listing.save
@@ -70,7 +90,7 @@ class ListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def listing_params
-      params.require(:listing).permit(:user_id, :type_id, :name, :duration, :price, :description)
+      params.require(:listing).permit(:user_id, :type_id, :name, :duration, :price, :description, :footage)
     end
 
     # Find listing owner
