@@ -8,6 +8,6 @@
   <%= image_tag listing.footage, width: '400px' %>
   <br>
   <%= listing.description %>
-  <p class="text-blue-600 text-center">Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
+  <p>Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
   <%= link_to 'View', listing %>
 <% end %>
