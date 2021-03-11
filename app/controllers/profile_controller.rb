@@ -27,6 +27,7 @@ class ProfileController < ApplicationController
   end
 
   def edit
+    @profile = current_user.profile
   end
 
   def update
@@ -36,16 +37,15 @@ class ProfileController < ApplicationController
         format.json { render :show, status: :ok, location: profile+path}
       else
         format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @profile.errors, status: :unprocessable_entity }
+        format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
-  end
-      # redirect_to profile_path
+    end
   end
 
   private
   
   def profile_params
-    params.permit(:about_me, :age)
+    params.require(:profile).permit(:about_me, :age)
   end
 
   def find_user
