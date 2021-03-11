@@ -6,7 +6,7 @@
 <% @listings.each do |listing| %>
   <h4><%= listing.name %></h4>
   <%# img_url = url_for(listing.footage, width: 100, height: 100, effect: "cartoonify") %>
-  <%= cl_image_tag generate_tag(@listing.footage.url) %>
+  <%= cl_image_tag generate_tag(listing.footage.url) %>
   <br>
   <%= listing.description %>
   <p>Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
