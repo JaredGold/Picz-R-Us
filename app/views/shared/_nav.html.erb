@@ -1,21 +1,26 @@
-<nav class="border-2 flex justify-between py-1.5 text-sm px-2">
+<nav class=" flex justify-between py-3 text-base px-2 shadow bg-gray-50 ">
+  
   <div>
-    <%= link_to "Home", root_path %>
+    <%= link_to "Home", root_path, class: "hover:text-purple-700 hover:text-opacity-90 font-light" %>
   </div>
+
   <div class="flex justify-between">
     <div class="pr-4">
       <% if user_signed_in? && current_user.profile != nil%>
-          <%= link_to current_user.username.capitalize, profile_path, class: "hover:bg-blue-500" %>
+          <%= link_to current_user.username.capitalize, profile_path, class: "hover:text-purple-700 hover:text-opacity-90 font-light" %>
         <% else %>
-          <%= link_to current_user.username.capitalize, new_profile_path %>
+          <%= link_to current_user.username.capitalize, new_profile_path, class: "hover:text-purple-700 hover:text-opacity-90 font-light" %>
       <% end %>
     </div>
+
     <div>
       <% if !user_signed_in? %>
-        <%= link_to "Sign in/up", new_user_session_path %>
+        <%= link_to "Sign in/up", new_user_session_path, class: "hover:text-purple-700 hover:text-opacity-90 font-light" %>
       <% else %>
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "hover:text-purple-700 hover:text-opacity-90 font-light" %>
       <% end %>
     </div>
+  
   </div>
+
 </nav>
