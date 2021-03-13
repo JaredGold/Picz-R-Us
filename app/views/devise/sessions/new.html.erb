@@ -1,7 +1,7 @@
 <div class='sign-in-page flex justify-center items-center'>
-  <div class='border rounded-3xl border-black border-opacity-25 bg-white shadow-lg w-2/5 h-4/5 flex flex-col justify-start' >
+  <div class='border rounded-3xl border-black border-opacity-25 bg-white shadow-lg sm:4/5 lg:w-2/5 flex flex-col justify-start' >
     <h2 class='text-5xl font-bold text-center mt-8 text-purple-700 '>Log in</h2>
-    <div class='flex flex-col justify-center items-center sign-in-form'>
+    <div class='mx-4 flex flex-col justify-center items-center sign-in-form'>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field mb-8">
           <%= f.label :email %><br />
