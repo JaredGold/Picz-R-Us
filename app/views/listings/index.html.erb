@@ -4,22 +4,22 @@
 </div>
 
 <%# Below is every listing in a container/card %>
-<div class="mt-2 mr-6 flex flex-row flex-wrap justify-around space-y-6 space-x-6">
+<div class='mt-2 mr-0 flex flex-row flex-wrap justify-center space-y-6 space-x-6 mb-6'>
   <% i = 0 %>
   <% @listings.each do |listing| %>
     <% i += 1 %>
     <% if i == 1 %>
-      <div class='<%=@card%> mt-6 w-96 ml-6'>
+      <div class='<%=@card%> mt-6 ml-6'>
     <% else %>
       <div class='<%=@card%> h-80'>
     <% end %>
-      <h4 class='text-lg font-medium'><%= listing.name %></h4>
+      <h4 class='text-lg font-medium select-none'><%= listing.name %></h4>
       <%= cl_image_tag listing.footage.key, width: 200, :transformation=>[{:overlay=>{:font_family=>"Comic Sans MS", :font_size=>150, :font_weight=>"bold", :text=>listing.user.username}, :flags=>"cutter"},{:underlay=>listing.footage.key, :opacity=>70, :background=>"black"}] %>
       <br>
-      <div class='w-full'>
-        <p><%= listing.description %></p>
-        <p>Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
-        <%= link_to 'View', listing %>
+      <div class= 'w-full text-center'>
+        <p class='mb-1 text-sm font-light select-none'><%= listing.description %></p>
+        <p class='mb-1 select-none'>Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
+        <%= link_to 'View', listing, method: :get , class: 'border rounded-xl border-black bg-purple-600 py-0.5 px-2 text-purple-50 hover:bg-purple-900 mt-4 cursor-pointer w-min' %>
       </div>
     </div>
   <% end %>

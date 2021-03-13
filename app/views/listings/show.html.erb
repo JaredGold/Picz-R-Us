@@ -31,9 +31,6 @@
 
 
 <script src="https://js.stripe.com/v3/"></script>
-
-
-
 <script>
   document.getElementById("checkout-button").addEventListener("click", () => {
     const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
