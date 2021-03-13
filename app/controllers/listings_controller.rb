@@ -104,6 +104,8 @@ class ListingsController < ApplicationController
     end
 
     def set_card
-      @card = "w-80 h-full min-h-full border border-black flex flex-col justify-between items-center p-3 rounded-3xl bg-white border-opacity-25 shadow-lg"
+      @card = "w-80 h-full min-h-full border border-black 
+      flex flex-col justify-between items-center p-3 rounded-3xl 
+      g-white border-opacity-25 shadow-lg"
     end
 end
