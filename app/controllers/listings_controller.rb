@@ -2,6 +2,7 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy find_seller]
   before_action :find_seller, :find_type, only: %i[show]
   before_action :authenticate_user!, only: %i[new]
+  before_action :set_card, only: %i[index]
 
   # GET /listings or /listings.json
   def index
@@ -94,13 +95,15 @@ class ListingsController < ApplicationController
     end
 
     # Find listing owner
-    def find_seller()
+    def find_seller
       @seller = User.find(@listing.user_id)
     end
 
-    def find_type()
+    def find_type
       @type = Type.find(@listing.type_id)
     end
 
-    
+    def set_card
+      @card = "w-96 border border-black flex flex-col justify-between items-center p-3 rounded-3xl bg-white border-opacity-25 hover:shadow-lg"
+    end
 end
