@@ -1,4 +1,3 @@
-<div class='flex flex-col justify-center items-center'>
 <%= form_with(model: listing) do |form| %>
   <% if listing.errors.any? %>
     <div id="error_explanation">
@@ -34,8 +33,7 @@
     </div>
   <% end %>
   
-  <div class="actions mb-10">
+  <div class="actions">
     <%= form.submit "Create Listing" , class: 'bg-purple-600 hover:bg-purple-800 w-full h-10 rounded-3xl text-white border border-black cursor-pointer' %>
   </div>
 <% end %>
-</div>

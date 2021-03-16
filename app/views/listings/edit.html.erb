@@ -1,13 +1,15 @@
-<h1>Editing Listing</h1>
+<div class='sign-in-page flex justify-center items-center mt-6 mb-6 '>
+  <div class='border rounded-3xl border-black border-opacity-25 bg-white shadow-lg sm:w-4/5 lg:w-2/5 flex flex-col justify-start' >
+    <div class='mx-4 flex flex-col justify-center items-center edit-form'>
+      <h1 class='text-5xl font-bold text-center mt-8 mb-4 text-purple-700'>Edit Listing</h1>
 
-<% if @listing.footage.attached? %>
-  <p>
-    <%= image_tag @listing.footage, width: "400px" %>
-  </p>
-<% end %>
+      <% if @listing.footage.attached? %>
+        <p><%= cl_image_tag @listing.footage.key, width: 350 %></p>
+      <% end %>
 
-<%= render 'form', listing: @listing %>
+      <%= render 'form', listing: @listing %>
 
-
-<%= link_to 'Show', @listing %> |
-<%= link_to 'Back', listings_path %>
+      <span class='mb-4 mt-2'><%= link_to 'Show', @listing %> | <%= link_to 'Back', listings_path %> | <%= link_to 'Delete', listing_path,  data: { confirm: 'Are you sure?' }, method: :delete %></span>
+    </div>
+  </div>
+</div>

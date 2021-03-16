@@ -43,6 +43,13 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
+    if user_signed_in?
+      if current_user.id != @listing.user.id
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
   end
 
   # POST /listings or /listings.json
