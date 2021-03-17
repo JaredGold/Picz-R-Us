@@ -11,36 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :type_id %>
-    <%#= form.text_field :type_id %>
-    <%= form.collection_select(:type_id, Type.all, :id, :name, prompt: true ) %>
-  </div>
-
-  <div class="field">
+  <div class="field mb-4">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: 'w-full rounded-3xl mt-2' %>
   </div>
 
-  <div class="field">
+  <div class="field mb-4">
     <%= form.label :price %>
-    <%= form.number_field :price %>
+    <%= form.number_field :price, class: 'w-full rounded-3xl mt-2' %>
   </div>
 
-  <div class="field">
+  <div class="field mb-4">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: 'w-full rounded-3xl mt-2', rows: 4, cols: 30 %>
   </div>
 
   <% if !@listing.footage.attached? %>
-    <div class="field">
+    <div class="field mb-6">
       <%= form.label :footage %>
       <%= form.file_field :footage, direct_upload: true %>
     </div>
   <% end %>
   
-
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Create Listing" , class: 'bg-purple-600 hover:bg-purple-800 w-full h-10 rounded-3xl text-white border border-black cursor-pointer' %>
   </div>
 <% end %>

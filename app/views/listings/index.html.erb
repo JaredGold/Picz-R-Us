@@ -1,14 +1,30 @@
-<h1>Listings</h1>
+<h1 class='text-5xl font-medium text-center mt-4'>Footage</h1>
+<div class='flex justify-center'>
+  <%= button_to 'New Listing', new_listing_path, method: :get , class: 'border rounded-xl border-black bg-purple-600 py-0.5 px-2 text-purple-50 hover:bg-purple-900 mt-4 cursor-pointer w-40' %>
+</div>
 
-<%= link_to 'New Listing', new_listing_path %>
-
-
-<% @listings.each do |listing| %>
-  <h4><%= listing.name %></h4>
-  <%# img_url = url_for(listing.footage, width: 100, height: 100, effect: "cartoonify") %>
-  <%= cl_image_tag listing.footage.key %>
-  <br>
-  <%= listing.description %>
-  <p>Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
-  <%= link_to 'View', listing %>
-<% end %>
+<%# Below is every listing in a container/card %>
+<div class='mt-2 mr-4 flex flex-row flex-wrap justify-center space-y-6 space-x-6 mb-6'>
+  <% i = 0 %>
+  <% @listings.each do |listing| %>
+    <% i += 1 %>
+    <% if i == 1 %>
+      <div class='<%=@card%> mt-6 ml-6'>
+    <% else %>
+      <div class='<%=@card%> h-80'>
+    <% end %>
+      <h4 class='text-lg font-medium select-none'><%= listing.name %></h4>
+      <% if user_signed_in? && current_user.id == listing.user.id %>
+        <%= cl_image_tag listing.footage.key, width: 200 %>
+      <% else %>
+        <%= cl_image_tag listing.footage.key, width: 200, :transformation=>[{:overlay=>{:font_family=>"Comic Sans MS", :font_size=>150, :font_weight=>"bold", :text=>listing.user.username}, :flags=>"cutter"},{:underlay=>listing.footage.key, :opacity=>70, :background=>"black"}] %>
+      <% end %>
+      <br>
+      <div class= 'w-full text-center'>
+        <p class='mb-1 text-sm font-light select-none'><%= listing.description %></p>
+        <p class='mb-1 select-none'>Price: <%= "$"+number_with_precision(listing.price, precision: 2) %></p>
+        <%= link_to 'View', listing, method: :get , class: 'border rounded-xl border-black bg-purple-600 py-0.5 px-2 text-purple-50 hover:bg-purple-900 mt-4 cursor-pointer w-min' %>
+      </div>
+    </div>
+  <% end %>
+</div>

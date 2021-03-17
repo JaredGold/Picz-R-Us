@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+.sign-in-page{
+  width: 100%;
+  height: calc(100vh - 48px);
+}
+
+.sign-in-form{
+  height: calc(100% - (80px));
+}

@@ -1,44 +1,47 @@
-<% if @listing.footage.attached? %>
-    <%= cl_image_tag listing.footage.key %>
-<% end %>
+<div class='sign-in-page flex justify-center items-center'>
+  <div class='border rounded-3xl border-black border-opacity-25 bg-white shadow-lg sm:4/5 lg:w-2/5 flex flex-col justify-start' >
+    <div class='mx-4 mb-6 flex flex-col justify-center items-center sign-in-form'>
+      <h1 class='text-5xl font-bold text-center mt-8 mb-8 text-purple-700'><%=@listing.name%></h1>
+      <% if @listing.footage.attached? %>
+          <% if current_user.id == @listing.user.id %>
+          <%= cl_image_tag @listing.footage.key %>
+          <% else %>
+          <%= cl_image_tag @listing.footage.key, :transformation=>[{:overlay=>{:font_family=>"Comic Sans MS", :font_size=>150, :font_weight=>"bold", :text=>@listing.user.username}, :flags=>"cutter"},{:underlay=>@listing.footage.key, :opacity=>70, :background=>"black"}] %>
+          <% end %>
+      <% end %>
 
-<p>
-  <strong>Seller:</strong>
-  <%= @seller.username.capitalize %>
-</p>
+      <p class='mt-4'>
+        <strong>Seller:</strong>
+        <%= @seller.username.capitalize %>
+      </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @listing.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @listing.description %>
-</p>
-
-
-<% if user_signed_in? && @listing.user_id == current_user.id  %>
-  <%= link_to 'Edit', edit_listing_path(@listing) %> |  
-<% elsif user_signed_in? %>
-  <button id="checkout-button">Buy Footage <%= number_to_currency(@listing.price) %></button>
-  <br>
-<% else %>
-  <%= link_to 'Buy Now', new_user_session_path %>
-  <br>
-<% end %>
-<%= link_to 'Back', listings_path %>
+      <p class='mt-2'>
+        <strong>Description:</strong>
+        <%= @listing.description %>
+      </p>
 
 
-<script src="https://js.stripe.com/v3/"></script>
+      <% if user_signed_in? && @listing.user_id == current_user.id  %>
+        <span><%= link_to 'Edit', edit_listing_path(@listing) %> |  
+      <% elsif user_signed_in? %>
+        <button id="checkout-button" class='border rounded-xl border-black text-xl bg-green-600 py-0.5 px-2 text-green-50 hover:bg-green-900 mt-4 cursor-pointer w-max'>Buy Footage <%= number_to_currency(@listing.price) %></button>
+        <br>
+      <% else %>
+        <%= link_to 'Buy Now', new_user_session_path %>
+        <span>
+      <% end %>
+      <%= link_to 'Back', listings_path %></span>
 
 
-
-<script>
-  document.getElementById("checkout-button").addEventListener("click", () => {
-    const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
-      stripe.redirectToCheckout({
-        sessionId: "<%= @session_id %>"
-      });
-  })
-</script>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script>
+        document.getElementById("checkout-button").addEventListener("click", () => {
+          const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
+            stripe.redirectToCheckout({
+              sessionId: "<%= @session_id %>"
+            });
+        })
+      </script>
+    </div>
+  </div>
+</div>

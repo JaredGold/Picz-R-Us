@@ -1,38 +1,39 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy find_seller]
-  before_action :find_seller, :find_type, only: %i[show]
+  before_action :find_seller, only: %i[show]
   before_action :authenticate_user!, only: %i[new]
+  before_action :set_card, only: %i[index]
+  
 
   # GET /listings or /listings.json
   def index
     @listings = Listing.all
     @user = User.all
-    @type = Type.all
   end
 
   # GET /listings/1 or /listings/1.json
   def show
-    session = Stripe::Checkout::Session.create({
-      payment_method_types: ['card'],
-      customer_email: current_user.email,
-      line_items: [{
-        name: @listing.name,
-        description: @listing.description,
-        # images: @listing.footage,
-        # price_data: {
-          # },
-        amount: (@listing.price * 100).to_i,
-        currency: 'aud',
-        quantity: 1,
-        }],
-      mode: 'payment',
-      success_url: root_url,
-      cancel_url: root_url,
-    })
-  
-    @session_id = session.id
-
-    pp @listing.footage.url
+    if user_signed_in?
+      session = Stripe::Checkout::Session.create({
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+          name: @listing.name,
+          description: @listing.description,
+          # images: @listing.footage,
+          # price_data: {
+            # },
+          amount: (@listing.price * 100).to_i,
+          currency: 'aud',
+          quantity: 1,
+          }],
+        mode: 'payment',
+        success_url: root_url,
+        cancel_url: root_url,
+      })
+    
+      @session_id = session.id
+    end
   end
 
   # GET /listings/new
@@ -42,12 +43,19 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
+    if user_signed_in?
+      if current_user.id != @listing.user.id
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
   end
 
   # POST /listings or /listings.json
   def create
+    # accepted_formats = ['.jpeg', '.jpg', '.png', '.tiff', '.bmp', '.gif', '.raw']
     @listing = current_user.listings.create(listing_params)
-    # @listing.footage.attach()
 
     respond_to do |format|
       if @listing.save
@@ -94,13 +102,13 @@ class ListingsController < ApplicationController
     end
 
     # Find listing owner
-    def find_seller()
+    def find_seller
       @seller = User.find(@listing.user_id)
     end
 
-    def find_type()
-      @type = Type.find(@listing.type_id)
+    def set_card
+      @card = "w-80 h-full min-h-full border border-black 
+      flex flex-col justify-between items-center p-3 rounded-3xl 
+      bg-white border-opacity-25 shadow-lg"
     end
-
-    
 end

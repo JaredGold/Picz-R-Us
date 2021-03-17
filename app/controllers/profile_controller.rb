@@ -9,6 +9,9 @@ class ProfileController < ApplicationController
   end
   
   def new
+    if current_user.profile != nil
+      redirect_to profile_path
+    end
     @profile = Profile.new
   end
 
