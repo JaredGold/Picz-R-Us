@@ -13,17 +13,17 @@
 
   <div class="field mb-4">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'w-full rounded-3xl mt-2 border border-black' %>
+    <%= form.text_field :name, class: 'p-2 w-full rounded-3xl mt-2 border border-black' %>
   </div>
 
   <div class="field mb-4">
     <%= form.label :price %>
-    <%= form.number_field :price, class: 'w-full rounded-3xl mt-2 border border-black' %>
+    <%= form.number_field :price, class: 'p-2 w-full rounded-3xl mt-2 border border-black' %>
   </div>
 
   <div class="field mb-4">
     <%= form.label :description %>
-    <%= form.text_area :description, class: 'w-full rounded-3xl mt-2 border border-black', rows: 4, cols: 30 %>
+    <%= form.text_area :description, class: 'p-2 w-full rounded-3xl mt-2 border border-black', rows: 4, cols: 30 %>
   </div>
 
   <% if !@listing.footage.attached? %>
