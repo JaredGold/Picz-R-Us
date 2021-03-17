@@ -1,13 +1,20 @@
-<h1><%= @name %></h1>
-<p><strong>About Me:</strong> <%= @user_profile.about_me %></p>
-<p><strong>Age:</strong> <%= @user_profile.age %></p>
-
-<h4>My Works:</h4>
-
-<% i = 0 %>
-<% @user.listings.each do |listing| %>
-  <%= cl_image_tag listing.footage.key %>
-  <% i += 1%>
-  <% break if i == 10 %>
-<% end %>
-
+<div class='sign-in-page flex justify-center items-center'>
+  <div class='border rounded-3xl border-black border-opacity-25 bg-white shadow-lg sm:w-4/5 lg:w-4/5 flex flex-col justify-start' >
+    <div class='mx-4 mb-6 flex flex-col justify-center items-center'>
+      <h1 class='text-5xl font-medium text-center mt-4 mb-2 text-purple-700'><%= @name %></h1>
+      <p><strong>About Me:</strong> <%= @user_profile.about_me %></p>
+      <p><strong>Age:</strong> <%= @user_profile.age %></p>
+      <div class='border w-5/6 my-2'></div>
+      <h4 class='text-xl underline mb-4'>My Works:</h4>
+      <div class='flex flex-col space-y-4 md:space-y-0 md:space-x-4 md:flex-row'>
+        <% i = 0 %>
+        <% @user.listings.each do |listing| %>
+          <%= link_to cl_image_tag(listing.footage.key, width: 200), listing, class:'hover:shadow-xl' %>
+          <% i += 1%>
+          <% break if i == 9 %>
+        <% end %>
+      </div>
+    <%= link_to 'Edit', edit_profile_path, class:'mt-4 hover:text-purple-700 hover:text-opacity-90 font-light border rounded-2xl w-12 text-center' %>
+    </div>
+  </div>
+</div>

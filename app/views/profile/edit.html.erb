@@ -1,19 +1,24 @@
-<h1>Edit Your Profile</h1>
+<div class='sign-in-page flex justify-center items-center'>
+  <div class='border rounded-3xl border-black border-opacity-25 bg-white shadow-lg sm:4/5 lg:w-2/5 flex flex-col justify-start' >
+    <h1 class='text-5xl font-bold text-center mt-8 text-purple-700 '>Edit Your Profile</h1>
+    <div class='mx-4 flex flex-col justify-center items-center sign-in-form'>
+      <%= form_with(url: profile_edit_path , model: @profile) do |form| %>
 
-<%= form_with(url: profile_edit_path , model: @profile) do |form| %>
+        <div class="field mb-4 mt-4">
+          <%= form.label :about_me %>
+          <%= form.text_area :about_me, class: 'w-full rounded-3xl mt-2' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :about_me %>
-    <%= form.text_area :about_me %>
+        <div class="field mb-8">
+          <%= form.label :age %>
+          <%= form.number_field :age, class: 'w-full rounded-3xl mt-2'%>
+        </div>
+
+        <div class="actions mb-8">
+          <%= form.submit 'Save Profile', class: 'bg-purple-600 hover:bg-purple-800 w-full h-10 rounded-3xl text-white border border-black cursor-pointer' %>
+        </div>
+
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-
-<% end %>
+</div>

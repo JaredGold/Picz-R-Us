@@ -4,7 +4,7 @@
 </div>
 
 <%# Below is every listing in a container/card %>
-<div class='mt-2 mr-0 flex flex-row flex-wrap justify-center space-y-6 space-x-6 mb-6'>
+<div class='mt-2 mr-4 flex flex-row flex-wrap justify-center space-y-6 space-x-6 mb-6'>
   <% i = 0 %>
   <% @listings.each do |listing| %>
     <% i += 1 %>
@@ -14,7 +14,11 @@
       <div class='<%=@card%> h-80'>
     <% end %>
       <h4 class='text-lg font-medium select-none'><%= listing.name %></h4>
-      <%= cl_image_tag listing.footage.key, width: 200, :transformation=>[{:overlay=>{:font_family=>"Comic Sans MS", :font_size=>150, :font_weight=>"bold", :text=>listing.user.username}, :flags=>"cutter"},{:underlay=>listing.footage.key, :opacity=>70, :background=>"black"}] %>
+      <% if user_signed_in? && current_user.id == listing.user.id %>
+        <%= cl_image_tag listing.footage.key, width: 200 %>
+      <% else %>
+        <%= cl_image_tag listing.footage.key, width: 200, :transformation=>[{:overlay=>{:font_family=>"Comic Sans MS", :font_size=>150, :font_weight=>"bold", :text=>listing.user.username}, :flags=>"cutter"},{:underlay=>listing.footage.key, :opacity=>70, :background=>"black"}] %>
+      <% end %>
       <br>
       <div class= 'w-full text-center'>
         <p class='mb-1 text-sm font-light select-none'><%= listing.description %></p>
