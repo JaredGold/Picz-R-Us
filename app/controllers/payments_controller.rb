@@ -1,7 +1,10 @@
 class PaymentsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[webhook]
+  before_action :set_images, only: %i[footage]
+  before_action :set_card, only: %i[footage]
 
-  def success
+
+  def footage
   end
 
   def unsuccessful
@@ -15,8 +18,28 @@ class PaymentsController < ApplicationController
 
     buyer = User.find(payment.metadata.user_id)
 
-    puts "Listing is #{listing}"
-    puts "Buyer is #{buyer}"
+    PurchasedFootage.create(user_id: buyer.id, listing_id: listing.id)
+  end
+
+  private
+
+  def set_images
+    if current_user.purchased_footages != nil
+      @image = current_user.purchased_footages.all
+      @images = []
+      @image.each do |image|
+        @images << Listing.find(image.listing_id)
+      end
+      @images.reverse
+    else
+      redirect_to root_path
+    end
+  end
+
+  def set_card
+    @card = "border border-black 
+      flex flex-col justify-between items-center p-3 rounded-3xl 
+      bg-white border-opacity-25 shadow-lg"
   end
 
 end

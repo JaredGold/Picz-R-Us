@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   post  'profile/new',  to: 'profile#create'
 
   # Payments made successful or unsuccessful
-  get   'payment/success', to: 'payments#success',      as: 'payment_success'
+  get   'footage', to: 'payments#footage',              as: 'footage'
   post  'payments/webhook', to: 'payments#webhook'
 
   get   'payment/unsuccessful', to: 'payments#unsuccessful', as: 'payment_unsuccessful'

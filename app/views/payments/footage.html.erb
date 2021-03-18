@@ -1,0 +1,17 @@
+<h1 class='text-5xl font-medium text-center mt-4 text-purple-700'>Owned Footage</h1>
+<div class='flex justify-center'>
+  <% if @images.length == 0%>
+    <p>You currently do not own any footage.<br>
+      Why not purchase some 
+      <%= link_to 'here', root_path, class: 'text-purple-700 hover:text-purple-400' %>?
+    </p>
+  <% else %>
+    <div class='mt-2 mr-4 flex flex-row flex-wrap justify-center space-y-6 space-x-6 mb-6'>
+      <% @images.each do |image| %>
+      <div class='<%=@card%> hover:shadow-2xl mt-6 ml-6'>
+        <%= link_to cl_image_tag(image.footage.key, width: 200), image.footage.url %>
+      </div>
+      <% end %>
+    </div>
+  <%end %>
+</div

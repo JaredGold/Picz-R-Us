@@ -34,7 +34,7 @@ class ListingsController < ApplicationController
           }
         },
         mode: 'payment',
-        success_url: "#{root_url}payment/success",
+        success_url: "#{root_url}footage",
         cancel_url: root_url,
       })
     
