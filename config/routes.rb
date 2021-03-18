@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   # new profile allows the user to create a new profile
   get   'profile/new',  to: 'profile#new',              as: 'new_profile'
   post  'profile/new',  to: 'profile#create'
+
+  # Payments made successful or unsuccessful
+  get   'footage', to: 'payments#footage',              as: 'footage'
+  post  'payments/webhook', to: 'payments#webhook'
+
+  get   'payment/unsuccessful', to: 'payments#unsuccessful', as: 'payment_unsuccessful'
   
   # Set Devise Sign in/ sign up/ sign out routes
   as :user do

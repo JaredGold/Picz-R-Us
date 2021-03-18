@@ -27,8 +27,14 @@ class ListingsController < ApplicationController
           currency: 'aud',
           quantity: 1,
           }],
+        payment_intent_data:{
+          metadata:{
+            listing_id: @listing.id,
+            user_id: current_user.id
+          }
+        },
         mode: 'payment',
-        success_url: root_url,
+        success_url: "#{root_url}footage",
         cancel_url: root_url,
       })
     

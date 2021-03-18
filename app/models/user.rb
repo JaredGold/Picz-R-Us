@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :listings
   has_one :profile
+  has_many :purchased_footages
 end
