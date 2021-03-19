@@ -2,9 +2,7 @@ module.exports = {
     purge: [
     './app/**/*.html.erb',
     './app/helpers/**/*.rb',
-    './src/**/*.html',
-    './src/**/*.js',
-    './src/**/*.jsx',
+    './app/**/*.js',
   ],
 
   darkMode: false, // or 'media' or 'class'

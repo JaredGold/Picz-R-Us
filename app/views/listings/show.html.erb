@@ -3,7 +3,7 @@
     <div class='mx-4 mb-6 flex flex-col justify-center items-center sign-in-form'>
       <h1 class='text-5xl font-bold text-center mt-8 mb-8 text-purple-700'><%=@listing.name%></h1>
       <% if @listing.footage.attached? %>
-          <% if current_user.id == @listing.user.id %>
+          <% if user_signed_in? && current_user.id == @listing.user.id %>
           <%= cl_image_tag @listing.footage.key %>
           <% else %>
           <%= cl_image_tag @listing.footage.key, :transformation=>[{:overlay=>{:font_family=>"Comic Sans MS", :font_size=>150, :font_weight=>"bold", :text=>@listing.user.username}, :flags=>"cutter"},{:underlay=>@listing.footage.key, :opacity=>70, :background=>"black"}] %>
