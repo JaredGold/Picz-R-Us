@@ -9,6 +9,8 @@ class ProfileController < ApplicationController
   end
   
   def new
+    # Check if the user has a profile and if they do send them to the profile page or else
+    # Create a new profile for the user to fill out 
     if current_user.profile != nil
       redirect_to profile_path
     end
@@ -16,6 +18,7 @@ class ProfileController < ApplicationController
   end
 
   def create
+    # Pass in the paramaters the user has created in the new function set up in the view
     @profile = current_user.create_profile(profile_params)
 
     respond_to do |format|
@@ -31,6 +34,7 @@ class ProfileController < ApplicationController
   end
 
   def edit
+    # Edit the current user's profile
     @profile = current_user.profile
   end
 
@@ -49,18 +53,22 @@ class ProfileController < ApplicationController
   private
   
   def profile_params
+    # Check the required paramaters for the update and create functions
     params.require(:profile).permit(:about_me, :age)
   end
 
   def find_user
+    # Set the current user
     @user = current_user
   end
 
   def find_user_profile
+    # Set the current user's profile
     @user_profile = current_user.profile
   end
 
   def find_user_name
+    # Front end styling for the user's first and last name
     @name = "#{@user.first_name} #{@user.last_name}"
   end
 end

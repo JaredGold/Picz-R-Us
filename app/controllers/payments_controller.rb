@@ -11,6 +11,7 @@ class PaymentsController < ApplicationController
   end
   
   def webhook
+    # Receive the return webhook from Stripe and create a purchased footage using the blow
     payment_id = params[:data][:object][:payment_intent]
     payment = Stripe::PaymentIntent.retrieve(payment_id)
 
@@ -24,6 +25,7 @@ class PaymentsController < ApplicationController
   private
 
   def set_images
+    # Find all the images/listings the user has purchased and put them into an array useable by views 
     if current_user.purchased_footages != nil
       @image = current_user.purchased_footages.all
       @images = []
@@ -37,6 +39,7 @@ class PaymentsController < ApplicationController
   end
 
   def set_card
+    # Set front end styling for cards
     @card = "border border-black 
       flex flex-col justify-between items-center p-3 rounded-3xl 
       bg-white border-opacity-25 shadow-lg"
